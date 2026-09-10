@@ -1,0 +1,36 @@
+relationship 9b1eefce-1d8e-48f9-8eb3-206e952cc2a6
+	fromColumn: 'dw FactTransactions'.CustomerKey
+	toColumn: 'dw DimCustomer'.CustomerKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship ff579670-2cdf-4769-967a-3192951485cf
+	fromColumn: 'dw FactTransactions'.DateKey
+	toColumn: 'dw DimDate'.DateKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship 31c43bbd-637e-4e2a-ab68-9ed90e6587b1
+	fromColumn: 'dw FactTransactions'.GeographyKey
+	toColumn: 'dw DimGeography'.GeographyKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship 303c4475-a0f8-461c-a8e8-7a950fad472c
+	fromColumn: 'dw FactTransactions'.MerchantKey
+	toColumn: 'dw DimMerchant'.MerchantKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship 08634965-c6b8-42aa-afb8-7fe35805eff3
+	fromColumn: 'dw FactTransactions'.PaymentMethodKey
+	toColumn: 'dw DimPaymentMethod'.PaymentMethodKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3a31f2dd-d12f-4d01-97e7-bdafd4325176
+	fromColumn: 'dw FactTransactions'.TransactionStatusKey
+	toColumn: 'dw DimTransactionStatus'.TransactionStatusKey
+
+	annotation PBI_IsFromSource = FS
+

@@ -1,0 +1,88 @@
+table 'dw DimDate'
+	lineageTag: 32af58fb-f0cd-4b9c-98d0-d48889a1f452
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9dac4c4f-3725-4887-b0d2-27837f7fae55
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2ba39193-f281-4801-aa0d-a34408abb6dd
+		summarizeBy: none
+		sourceColumn: DateDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 33914b6c-f242-419a-9745-cfd5b6108e16
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: eaf56ec9-5ed6-4ab4-9c6e-146c322fe25c
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: f4bbdf34-e9f3-46c1-9c83-492431b7c8af
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 79fafbe6-e73f-4312-97ae-317d26c59f51
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weekday
+		dataType: string
+		lineageTag: 6897cc51-4cbc-4705-812a-6343c75ce50c
+		summarizeBy: none
+		sourceColumn: Weekday
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWeekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a3e22a40-d8cc-4b8c-bebb-133cd44723a2
+		summarizeBy: none
+		sourceColumn: IsWeekend
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dw DimDate' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "PaymentsRiskAnalytics"),
+				    dw_DimDate = Source{[Schema="dw",Item="DimDate"]}[Data]
+				in
+				    dw_DimDate
+
+	annotation PBI_ResultType = Table
+

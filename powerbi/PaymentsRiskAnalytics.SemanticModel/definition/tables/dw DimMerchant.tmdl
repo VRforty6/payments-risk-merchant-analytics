@@ -1,0 +1,123 @@
+table 'dw DimMerchant'
+	lineageTag: 93f45e89-b823-426c-9d2c-8412c7f41dbb
+
+	column MerchantKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fb05ff02-ec72-4be1-aaff-65394648c94b
+		summarizeBy: none
+		sourceColumn: MerchantKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantID
+		dataType: string
+		lineageTag: b31f8e4a-978d-432e-8cf4-f94c0b7078bc
+		summarizeBy: none
+		sourceColumn: MerchantID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantName
+		dataType: string
+		isHidden
+		lineageTag: 0dd4b793-ac16-4f7f-88ea-7ec10e2ce728
+		summarizeBy: none
+		sourceColumn: MerchantName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 6b83d5e8-19f6-4bfc-9aac-927fc65fef5f
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column RiskTier
+		dataType: string
+		lineageTag: 599a94df-4164-47ec-89ac-36394c80f8fb
+		summarizeBy: none
+		sourceColumn: RiskTier
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseDeclineProb
+		dataType: double
+		lineageTag: b264f505-5da6-4ff3-b14f-36f1553f3f11
+		summarizeBy: none
+		sourceColumn: BaseDeclineProb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BaseChargebackProb
+		dataType: double
+		lineageTag: 77482895-df8f-43d5-b4c9-96da3a26fad3
+		summarizeBy: none
+		sourceColumn: BaseChargebackProb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BaseRefundProb
+		dataType: double
+		lineageTag: a2d55447-e853-44c6-992c-5c63c51effb5
+		summarizeBy: none
+		sourceColumn: BaseRefundProb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AmountMean
+		dataType: double
+		lineageTag: 098b54be-2082-4632-b0bf-b13cff1d7233
+		summarizeBy: none
+		sourceColumn: AmountMean
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AmountStd
+		dataType: double
+		lineageTag: d9fbfd4a-d900-4051-af32-17870be27dc1
+		summarizeBy: none
+		sourceColumn: AmountStd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AnomalyType
+		dataType: string
+		lineageTag: 3264efe8-c0a9-432a-b13a-be382f9f41fb
+		summarizeBy: none
+		sourceColumn: AnomalyType
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantDisplayName
+		dataType: string
+		lineageTag: 6f7b8767-0c50-4d2f-b12a-7f9eb504d5b4
+		summarizeBy: none
+		sourceColumn: MerchantDisplayName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dw DimMerchant' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "PaymentsRiskAnalytics"),
+				    dw_DimMerchant = Source{[Schema="dw",Item="DimMerchant"]}[Data]
+				in
+				    dw_DimMerchant
+
+	annotation PBI_ResultType = Table
+

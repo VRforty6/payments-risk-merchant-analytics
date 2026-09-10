@@ -1,0 +1,256 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "validationTable0001",
+  "position": {
+    "x": 40,
+    "y": 40,
+    "z": 1000,
+    "height": 960,
+    "width": 1840,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Total Transactions"
+                }
+              },
+              "queryRef": "dw FactTransactions.Total Transactions",
+              "nativeQueryRef": "Total Transactions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Total Transaction Amount"
+                }
+              },
+              "queryRef": "dw FactTransactions.Total Transaction Amount",
+              "nativeQueryRef": "Total Transaction Amount"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Average Transaction Value"
+                }
+              },
+              "queryRef": "dw FactTransactions.Average Transaction Value",
+              "nativeQueryRef": "Average Transaction Value"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Approved Transactions"
+                }
+              },
+              "queryRef": "dw FactTransactions.Approved Transactions",
+              "nativeQueryRef": "Approved Transactions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Declined Transactions"
+                }
+              },
+              "queryRef": "dw FactTransactions.Declined Transactions",
+              "nativeQueryRef": "Declined Transactions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Approval Rate"
+                }
+              },
+              "queryRef": "dw FactTransactions.Approval Rate",
+              "nativeQueryRef": "Approval Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Decline Rate"
+                }
+              },
+              "queryRef": "dw FactTransactions.Decline Rate",
+              "nativeQueryRef": "Decline Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Refund Count"
+                }
+              },
+              "queryRef": "dw FactTransactions.Refund Count",
+              "nativeQueryRef": "Refund Count"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Refund Rate"
+                }
+              },
+              "queryRef": "dw FactTransactions.Refund Rate",
+              "nativeQueryRef": "Refund Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Refund Amount"
+                }
+              },
+              "queryRef": "dw FactTransactions.Refund Amount",
+              "nativeQueryRef": "Refund Amount"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Chargeback Count"
+                }
+              },
+              "queryRef": "dw FactTransactions.Chargeback Count",
+              "nativeQueryRef": "Chargeback Count"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Chargeback Rate"
+                }
+              },
+              "queryRef": "dw FactTransactions.Chargeback Rate",
+              "nativeQueryRef": "Chargeback Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Chargeback Amount"
+                }
+              },
+              "queryRef": "dw FactTransactions.Chargeback Amount",
+              "nativeQueryRef": "Chargeback Amount"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Unique Customers"
+                }
+              },
+              "queryRef": "dw FactTransactions.Unique Customers",
+              "nativeQueryRef": "Unique Customers"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dw FactTransactions"
+                    }
+                  },
+                  "Property": "Active Merchants"
+                }
+              },
+              "queryRef": "dw FactTransactions.Active Merchants",
+              "nativeQueryRef": "Active Merchants"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

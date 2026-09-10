@@ -1,0 +1,50 @@
+table 'dw DimCustomer'
+	lineageTag: e59c5443-1f1d-414a-a1ea-ac2dbec08291
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8d27bc5c-1a15-4c57-8967-01b38c5edefe
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: string
+		lineageTag: 12b3dd4d-3641-46c8-b955-a49e9cbd111e
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		lineageTag: 06846f0e-e202-4761-87cd-1cc286f28a7b
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 868426ce-5ac2-4347-9113-1a53b6706dd0
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dw DimCustomer' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "PaymentsRiskAnalytics"),
+				    dw_DimCustomer = Source{[Schema="dw",Item="DimCustomer"]}[Data]
+				in
+				    dw_DimCustomer
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,128 @@
+﻿# ============================================================
+# Payments Risk & Merchant Analytics
+# Git ignore rules
+# ============================================================
+
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.pytype/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+
+# Python environments
+.venv/
+venv/
+env/
+ENV/
+
+# ----------------------------
+# Secrets / local configuration
+# ----------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# ----------------------------
+# IDE / local AI tooling
+# ----------------------------
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+*~
+
+# ----------------------------
+# Operating system
+# ----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----------------------------
+# Project backups / copies
+# ----------------------------
+backups/
+powerbi - Copy/
+
+# ----------------------------
+# Dataset outputs
+# Raw and generated datasets are reproducible and should
+# not be stored in Git.
+# ----------------------------
+data/raw/
+data/processed/
+data/rejected/
+data/reference/
+
+# Keep documentation/placeholders if present
+!data/.gitkeep
+!data/README.md
+
+# ----------------------------
+# Power BI
+# ----------------------------
+
+# Binary Power BI file - PBIP is the canonical source
+*.pbix
+
+# Local Power BI Desktop state/cache.
+# IMPORTANT: keep Report and SemanticModel definition files;
+# only ignore their local .pbi working directories.
+**/.pbi/
+
+# ----------------------------
+# Temporary / generated files
+# ----------------------------
+*.tmp
+*.temp
+*.log
+output.txt
+test.txt
+
+# ----------------------------
+# Local database files
+# ----------------------------
+*.sqlite
+*.sqlite3
+
+# ----------------------------
+# Archives / duplicate artifacts
+# ----------------------------
+BI-Design-System.zip
+
+# ----------------------------
+# Notebook cache
+# ----------------------------
+.ipynb_checkpoints/
+
+# ----------------------------
+# Build/package outputs
+# ----------------------------
+build/
+dist/
+*.egg-info/
+
+# Local development / backup metadata
+.gitignore.backup
+CLAUDE.md
+
+# Portfolio exclusions
+BI-Design-System/
+assets/reference/
+*.backup
+
+# Power BI local/ad-hoc DAX query tabs
+powerbi/PaymentsRiskAnalytics.SemanticModel/DAXQueries/

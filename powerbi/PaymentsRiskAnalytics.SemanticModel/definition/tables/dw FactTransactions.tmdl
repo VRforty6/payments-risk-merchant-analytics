@@ -1,0 +1,302 @@
+table 'dw FactTransactions'
+	lineageTag: 009633ca-fc84-4684-bffe-58e2eaccfce6
+
+	measure 'Total Transactions' = COUNTROWS('dw FactTransactions')
+		formatString: #,0
+		displayFolder: Transactions
+		lineageTag: 7731cb44-7a99-402b-ae87-b7ca983be0ae
+
+	measure 'Total Transaction Amount' = SUM('dw FactTransactions'[TransactionAmount])
+		formatString: $#,0.00;-$#,0.00;$#,0.00
+		displayFolder: Transactions
+		lineageTag: 50e7fd66-9e48-448c-9db2-b02c88b74272
+
+	measure 'Average Transaction Value' = DIVIDE([Total Transaction Amount], [Total Transactions], 0)
+		formatString: $#,0.00;-$#,0.00;$#,0.00
+		displayFolder: Transactions
+		lineageTag: 085cc65c-7ee0-4a43-b5ac-b4d6c2777ac9
+
+	measure 'Approved Transactions' = CALCULATE([Total Transactions], 'dw DimTransactionStatus'[IsApproved] = TRUE())
+		formatString: #,0
+		displayFolder: Transactions
+		lineageTag: 2197d3d9-530b-48ca-99f5-347e4fac74c0
+
+	measure 'Declined Transactions' = CALCULATE([Total Transactions], 'dw DimTransactionStatus'[IsApproved] = FALSE(), 'dw FactTransactions'[TransactionStatusKey] <> 0)
+		formatString: #,0
+		displayFolder: Transactions
+		lineageTag: f51b9a94-202b-44cc-abcd-46f54b7953e1
+
+	measure 'Approval Rate' = DIVIDE([Approved Transactions], [Total Transactions], 0)
+		formatString: 0.00%
+		displayFolder: Transactions
+		lineageTag: 8777694d-ffd8-4de8-a0ff-605859c68f44
+
+	measure 'Decline Rate' = DIVIDE([Declined Transactions], [Total Transactions], 0)
+		formatString: 0.00%
+		displayFolder: Transactions
+		lineageTag: 5691daed-9955-4067-83a8-57681bed7647
+
+	measure 'Refund Count' = CALCULATE([Total Transactions], 'dw FactTransactions'[IsRefunded] = TRUE())
+		formatString: #,0
+		displayFolder: Refunds
+		lineageTag: df9036bf-2ef0-4107-881b-76a19f94e5be
+
+	measure 'Refund Rate' = DIVIDE([Refund Count], [Total Transactions], 0)
+		formatString: 0.00%
+		displayFolder: Refunds
+		lineageTag: 3820aded-3ce6-442d-84aa-a2689485b130
+
+	measure 'Refund Amount' = SUM('dw FactTransactions'[RefundAmount])
+		formatString: $#,0.00;-$#,0.00;$#,0.00
+		displayFolder: Refunds
+		lineageTag: 5a9f9d85-f10e-43a2-bb65-a7614addd56a
+
+	measure 'Chargeback Count' = CALCULATE([Total Transactions], 'dw FactTransactions'[IsChargeback] = TRUE())
+		formatString: #,0
+		displayFolder: Chargebacks
+		lineageTag: 59a29af4-b55d-4901-affb-b981eb7102e8
+
+	measure 'Chargeback Rate' = DIVIDE([Chargeback Count], [Total Transactions], 0)
+		formatString: 0.00%
+		displayFolder: Chargebacks
+		lineageTag: 77ca5d8d-b12c-46ea-8743-45b010705a51
+
+	measure 'Chargeback Amount' = SUM('dw FactTransactions'[ChargebackAmount])
+		formatString: $#,0.00;-$#,0.00;$#,0.00
+		displayFolder: Chargebacks
+		lineageTag: c6f17437-997b-4149-905f-67dd7eb07d5d
+
+	measure 'Unique Customers' = DISTINCTCOUNT('dw FactTransactions'[CustomerKey])
+		formatString: #,0
+		displayFolder: Customers
+		lineageTag: b798039c-5250-4400-890a-4e79eebb0f43
+
+	measure 'Active Merchants' = DISTINCTCOUNT('dw FactTransactions'[MerchantKey])
+		formatString: #,0
+		displayFolder: Risk
+		lineageTag: 9d10f9c1-1cb1-4a27-914b-88108022b97f
+
+	measure 'Previous Month Transaction Amount' =
+			
+			CALCULATE(
+			    [Total Transaction Amount],
+			    PREVIOUSMONTH('dw DimDate'[DateDate])
+			)
+		formatString: $#,0.00;-$#,0.00;$#,0.00
+		displayFolder: Time Intelligence
+		lineageTag: 90c0d044-a9f3-40b9-9f2b-f917a614ecbb
+
+	measure 'MoM Transaction Amount %' = DIVIDE([Total Transaction Amount] - [Previous Month Transaction Amount], [Previous Month Transaction Amount], 0)
+		formatString: 0.00%
+		displayFolder: Time Intelligence
+		lineageTag: b1da1e4e-768f-4565-a823-61d051609a48
+
+	measure 'Rolling 30 Day Transaction Amount' =
+			
+			CALCULATE(
+			    [Total Transaction Amount],
+			    DATESINPERIOD('dw DimDate'[DateDate], MAX('dw DimDate'[DateDate]), -30, DAY)
+			)
+		formatString: $#,0.00;-$#,0.00;$#,0.00
+		displayFolder: Time Intelligence
+		lineageTag: 259a25cd-4c13-4b64-a755-79b603278cc6
+
+	measure 'Merchant Risk Tier Index' =
+			
+			AVERAGEX(
+			    VALUES('dw DimMerchant'[MerchantKey]),
+			    VAR CurrentRiskTier =
+			        CALCULATE(SELECTEDVALUE('dw DimMerchant'[RiskTier]))
+			    RETURN
+			    SWITCH(
+			        CurrentRiskTier,
+			        "high", 3,
+			        "medium", 2,
+			        "low", 1,
+			        BLANK()
+			    )
+			)
+		formatString: 0.0
+		displayFolder: Risk
+		lineageTag: cb11e900-5a8e-4c88-b851-ba1b0ef83ee4
+
+	column TransactionKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f4fc61ed-1931-45a3-82f5-88dd8949637f
+		summarizeBy: count
+		sourceColumn: TransactionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionID
+		dataType: string
+		lineageTag: b9d58995-18c5-4c14-a988-9a1a71259923
+		summarizeBy: none
+		sourceColumn: TransactionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9cc0b544-e366-4d57-8341-578acca965f5
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionTimestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 96c1b21d-91b2-411f-96ba-853773dffd62
+		summarizeBy: none
+		sourceColumn: TransactionTimestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c66f58a5-2891-4d38-b2f1-f38b908b921c
+		summarizeBy: none
+		sourceColumn: MerchantKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 458c200a-6183-4ded-8e90-4568fb336b0c
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column GeographyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 973a98db-2267-43e7-810f-c8b97b48c53d
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethodKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 31d1a01c-3575-4651-aa75-14c58fbe9435
+		summarizeBy: none
+		sourceColumn: PaymentMethodKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionStatusKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 82d19ada-af86-46a7-be5c-a8265c797a7b
+		summarizeBy: none
+		sourceColumn: TransactionStatusKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TransactionAmount
+		dataType: double
+		lineageTag: d0724df7-3574-4e21-b1ca-f0f5508688a9
+		summarizeBy: sum
+		sourceColumn: TransactionAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ProcessingFee
+		dataType: double
+		lineageTag: c7aa6d73-c4cf-4544-a3da-ec19db891670
+		summarizeBy: sum
+		sourceColumn: ProcessingFee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RefundAmount
+		dataType: double
+		lineageTag: 2c656376-b1a2-4259-9682-6605d5700205
+		summarizeBy: sum
+		sourceColumn: RefundAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ChargebackAmount
+		dataType: double
+		lineageTag: e74f8025-2a94-4942-a7e0-16145623d957
+		summarizeBy: sum
+		sourceColumn: ChargebackAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsRefunded
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: dfe0bd29-2e1b-4205-97e5-29675ffe241a
+		summarizeBy: none
+		sourceColumn: IsRefunded
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsChargeback
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 04e45606-3511-4b3c-888b-0de2f1f70526
+		summarizeBy: none
+		sourceColumn: IsChargeback
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeviceType
+		dataType: string
+		lineageTag: 8746cb90-1d9c-4fe5-9a56-2bff91beddcf
+		summarizeBy: none
+		sourceColumn: DeviceType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Channel
+		dataType: string
+		lineageTag: f6f24b24-3afd-494c-b97b-c4beffc0f3a9
+		summarizeBy: none
+		sourceColumn: Channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeclineReason
+		dataType: string
+		lineageTag: aef179cd-12a4-4c27-a151-272cbca793ca
+		summarizeBy: none
+		sourceColumn: DeclineReason
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dw FactTransactions' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "PaymentsRiskAnalytics"),
+				    dw_FactTransactions = Source{[Schema="dw",Item="FactTransactions"]}[Data]
+				in
+				    dw_FactTransactions
+
+	annotation PBI_ResultType = Table
+

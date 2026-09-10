@@ -1,0 +1,129 @@
+# Generator Configuration for Synthetic Payments Dataset
+random_seed: 42
+
+# Dataset sizes
+n_merchants: 100
+n_customers: 20000
+n_countries: 15
+n_years: 2
+n_transactions: 75000
+
+# Date range
+start_date: "2024-07-09"  # Two years back from today (2026-07-09)
+end_date: "2026-07-09"
+
+# Merchant categories and their typical transaction amount ranges (in currency units)
+merchant_categories:
+  - name: "retail"
+    amount_mean: 50
+    amount_std: 20
+    weight: 0.3
+  - name: "restaurant"
+    amount_mean: 30
+    amount_std: 10
+    weight: 0.2
+  - name: "travel"
+    amount_mean: 150
+    amount_std: 50
+    weight: 0.1
+  - name: "electronics"
+    amount_mean: 200
+    amount_std: 80
+    weight: 0.1
+  - name: "clothing"
+    amount_mean: 40
+    amount_std: 15
+    weight: 0.1
+  - name: "groceries"
+    amount_mean: 60
+    amount_std: 25
+    weight: 0.1
+  - name: "healthcare"
+    amount_mean: 100
+    amount_std: 40
+    weight: 0.05
+  - name: "entertainment"
+    amount_mean: 70
+    amount_std: 30
+    weight: 0.05
+
+# Merchant risk tiers and their impact on decline and chargeback probabilities
+risk_tiers:
+  - tier: "low"
+    decline_prob: 0.01
+    chargeback_prob: 0.001
+    refund_prob: 0.02
+    weight: 0.5
+  - tier: "medium"
+    decline_prob: 0.02
+    chargeback_prob: 0.005
+    refund_prob: 0.03
+    weight: 0.3
+  - tier: "high"
+    decline_prob: 0.05
+    chargeback_prob: 0.02
+    refund_prob: 0.05
+    weight: 0.2
+
+# Payment methods and their influence on approval rate
+payment_methods:
+  - method: "credit_card"
+    approval_rate: 0.95
+    weight: 0.4
+  - method: "debit_card"
+    approval_rate: 0.92
+    weight: 0.3
+  - method: "digital_wallet"
+    approval_rate: 0.97
+    weight: 0.2
+  - method: "bank_transfer"
+    approval_rate: 0.88
+    weight: 0.1
+
+# Device types and channels
+device_types:
+  - "mobile"
+  - "desktop"
+  - "tablet"
+channels:
+  - "online"
+  - "pos"  # point of sale
+  - "in_app"
+
+# Currency codes (we'll use a few major ones)
+currency_codes:
+  - "USD"
+  - "EUR"
+  - "GBP"
+  - "JPY"
+  - "CAD"
+  - "AUD"
+
+# Regions for countries
+regions:
+  - "North America"
+  - "Europe"
+  - "Asia"
+  - "South America"
+  - "Africa"
+  - "Oceania"
+
+# Anomaly configuration for intentional behavioural anomalies
+anomalies:
+  n_anomalous_merchants: 4
+  anomaly_types:
+    - "approval_rate_decline"
+    - "chargeback_spike"
+    - "refund_spike"
+    - "unusual_volume_increase"
+  # Parameters for each anomaly type (applied to the selected merchants)
+  approval_rate_decline:
+    start: 0.9
+    approval_rate end: 0.5
+    # Linear decline over the transaction timeline
+  chargeback_spike:
+    chargeback_prob multiplier: 10  # 10x increase
+  refund_spike:
+    refund_prob multiplier: 10
+  unusual_volume_increase:
+    volume multiplier: 5  # 5x increase in transaction volume for that merchant

@@ -1,0 +1,84 @@
+table 'dw DimTransactionStatus'
+	lineageTag: a04ca73e-4fe6-4606-8933-303b47c04c2b
+
+	column TransactionStatusKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0a92cdb7-795b-43f9-b600-ad1182d70ba4
+		summarizeBy: none
+		sourceColumn: TransactionStatusKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsApproved
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a9f8aaca-d6d9-497b-adb7-1067c866a351
+		summarizeBy: none
+		sourceColumn: IsApproved
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeclineReason
+		dataType: string
+		isHidden
+		lineageTag: 5e621728-b07e-4140-bd78-f55bd96eb17a
+		summarizeBy: none
+		sourceColumn: DeclineReason
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsRefunded
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 55205143-b35d-431f-85b9-aee3774b8c74
+		summarizeBy: none
+		sourceColumn: IsRefunded
+
+		annotation SummarizationSetBy = Automatic
+
+	column RefundAmount
+		dataType: double
+		isHidden
+		lineageTag: 203703f3-636c-4ee4-b563-1746cff10921
+		summarizeBy: none
+		sourceColumn: RefundAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsChargeback
+		dataType: boolean
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5e13bfb6-646e-4b00-bc88-cc4839bc94fd
+		summarizeBy: none
+		sourceColumn: IsChargeback
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChargebackAmount
+		dataType: double
+		isHidden
+		lineageTag: d6674191-de13-4390-a11a-edb897c0ae20
+		summarizeBy: none
+		sourceColumn: ChargebackAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'dw DimTransactionStatus' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "PaymentsRiskAnalytics"),
+				    dw_DimTransactionStatus = Source{[Schema="dw",Item="DimTransactionStatus"]}[Data]
+				in
+				    dw_DimTransactionStatus
+
+	annotation PBI_ResultType = Table
+

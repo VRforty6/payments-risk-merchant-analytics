@@ -1,0 +1,22 @@
+{
+  "name": "Payments Risk Analytics",
+  "dataColors": [
+    "#7C3AED",
+    "#4F46E5",
+    "#3B82F6",
+    "#22C55E",
+    "#F59E0B",
+    "#EF4444",
+    "#06B6D4",
+    "#A855F7"
+  ],
+  "background": "#0F172A",
+  "foreground": "#F8FAFC",
+  "tableAccent": "#7C3AED",
+  "good": "#22C55E",
+  "neutral": "#F59E0B",
+  "bad": "#EF4444",
+  "maximum": "#22C55E",
+  "center": "#F59E0B",
+  "minimum": "#EF4444"
+}

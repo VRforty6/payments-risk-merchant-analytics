@@ -1,0 +1,11 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Subtle grid lines -->
+  <defs>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#3B82F6" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+  <!-- Horizon line -->
+  <line x1="0" y1="360" x2="1280" y2="360" stroke="#7C3AED" stroke-width="2" opacity="0.2"/>
+</svg>

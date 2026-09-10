@@ -1,0 +1,836 @@
+{
+  "height": 1080,
+  "width": 1920,
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "displayName": "Executive Overview",
+  "displayOption": "FitToPage",
+  "visualInteractions": [
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "headerTitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "headerSubtitle"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "kpiTotalAmount"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "kpiTotalTransactions"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "kpiApprovalRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "kpiDeclineRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "kpiChargebackRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "breakdownApprovalDecline",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "kpiRefundRate"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerTitle",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "headerSubtitle",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalAmount",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiTotalTransactions",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiApprovalRate",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiDeclineRate",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiChargebackRate",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "kpiRefundRate",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "trendAmountOverTime",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barAmountByCountry",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "barTopMerchants",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "donutPaymentMethodMix",
+      "source": "breakdownApprovalDecline"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "trendAmountOverTime"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "trendAmountOverTime"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "trendAmountOverTime"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "trendAmountOverTime"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "barAmountByCountry"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "barAmountByCountry"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "barAmountByCountry"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "barAmountByCountry"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "barTopMerchants"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "barTopMerchants"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "barTopMerchants"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "barTopMerchants"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerDate",
+      "source": "donutPaymentMethodMix"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerMerchant",
+      "source": "donutPaymentMethodMix"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerCountry",
+      "source": "donutPaymentMethodMix"
+    },
+    {
+      "type": "NoFilter",
+      "target": "slicerPaymentMethod",
+      "source": "donutPaymentMethodMix"
+    }
+  ],
+  "name": "executiveOverview0001",
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#0F172A'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

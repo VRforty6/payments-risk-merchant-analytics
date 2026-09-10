@@ -1,0 +1,65 @@
+table 'dw DimGeography'
+	lineageTag: 0dbad8fb-5d22-4a0b-add4-828292b148d8
+
+	column GeographyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e18b69d7-b9cd-4704-b2b8-4e23fc1e9f8b
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryID
+		dataType: string
+		lineageTag: f654f679-9364-4e87-b035-6fa210c2ad22
+		summarizeBy: none
+		sourceColumn: CountryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryName
+		dataType: string
+		isHidden
+		lineageTag: 92da030c-96b6-4c17-8b38-cac115228d27
+		summarizeBy: none
+		sourceColumn: CountryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 361d01dd-31aa-4583-94ef-4fe4eccbfc1f
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyCode
+		dataType: string
+		lineageTag: 55803cab-a83c-4033-bd21-f57f2588615f
+		summarizeBy: none
+		sourceColumn: CurrencyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column MarketDisplayName
+		dataType: string
+		lineageTag: 05db9e28-cb2d-4b8a-a3b5-6873c9105878
+		summarizeBy: none
+		sourceColumn: MarketDisplayName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dw DimGeography' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "PaymentsRiskAnalytics"),
+				    dw_DimGeography = Source{[Schema="dw",Item="DimGeography"]}[Data]
+				in
+				    dw_DimGeography
+
+	annotation PBI_ResultType = Table
+

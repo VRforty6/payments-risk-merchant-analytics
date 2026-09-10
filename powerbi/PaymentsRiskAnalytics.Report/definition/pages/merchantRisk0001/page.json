@@ -1,0 +1,1261 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "merchantRisk0001",
+  "displayName": "Merchant Risk",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#0F172A'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "headerSurface",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSurface",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerTitle",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "headerSubtitle",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "contextNote",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "filterBarSurface",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiActiveMerchants",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTotalAmount",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiDeclineRate",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiRefundRate",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "kpiTierIndex",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiChargebackRate",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "headerSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "headerTitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "headerSubtitle",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "contextNote",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "filterBarSurface",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "kpiActiveMerchants",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "kpiTotalAmount",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "kpiDeclineRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "kpiRefundRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "kpiChargebackRate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "riskMatrix",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "chargebackRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "refundRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "declineRateByMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "kpiTierIndex",
+      "target": "riskTierDistribution",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskMatrix",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskMatrix",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskMatrix",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskMatrix",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskMatrix",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "chargebackRateByMerchant",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "chargebackRateByMerchant",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "chargebackRateByMerchant",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "chargebackRateByMerchant",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "chargebackRateByMerchant",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "refundRateByMerchant",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "refundRateByMerchant",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "refundRateByMerchant",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "refundRateByMerchant",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "refundRateByMerchant",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "declineRateByMerchant",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "declineRateByMerchant",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "declineRateByMerchant",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "declineRateByMerchant",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "declineRateByMerchant",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskTierDistribution",
+      "target": "slicerDate",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskTierDistribution",
+      "target": "slicerMerchant",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskTierDistribution",
+      "target": "slicerMarket",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskTierDistribution",
+      "target": "slicerCategory",
+      "type": "NoFilter"
+    },
+    {
+      "source": "riskTierDistribution",
+      "target": "slicerRiskTier",
+      "type": "NoFilter"
+    }
+  ]
+}
