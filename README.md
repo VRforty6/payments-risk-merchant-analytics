@@ -204,7 +204,7 @@ The current working SQL execution order is documented by `sql/procedures/12_run_
 ```powershell
 sqlcmd -S localhost -i sql/01_create_database.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/02_create_tables.sql
-sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/03_load_csvs.sql -v CsvPath="D:/payment-risk-analytics/data/raw/"
+sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/03_load_csvs.sql -v CsvPath="C:/path/to/payment-risk-merchant-analytics/data/raw/"
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/04_load_dimensions_and_fact.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/05_create_views.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/07_apply_display_labels.sql
