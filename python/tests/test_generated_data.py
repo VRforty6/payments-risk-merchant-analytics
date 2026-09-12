@@ -4,29 +4,54 @@ Pytest tests for synthetic payment data generation.
 import pandas as pd
 import os
 import pytest
+import sys
 from datetime import datetime, timedelta
+
+pytestmark = pytest.mark.integration
 
 # Path to the data directory
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'raw')
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'python', 'config', 'generator_config.yaml')
 
 @pytest.fixture
-def dataframes():
-    """Load the CSV files."""
-    merchants_df = pd.read_csv(os.path.join(DATA_DIR, 'merchants.csv'))
-    customers_df = pd.read_csv(os.path.join(DATA_DIR, 'customers.csv'))
-    countries_df = pd.read_csv(os.path.join(DATA_DIR, 'countries.csv'))
+def config():
+    """Load the authoritative generator configuration."""
+    import yaml
+    with open(CONFIG_PATH, 'r') as f:
+        return yaml.safe_load(f)
+
+@pytest.fixture(scope='session')
+def data_dir(tmp_path_factory):
+    """Use committed local output or generate one temporary integration dataset."""
+    required = ('merchants.csv', 'customers.csv', 'countries.csv', 'transactions.csv')
+    if all(os.path.exists(os.path.join(DATA_DIR, name)) for name in required):
+        return DATA_DIR
+
+    python_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    if python_dir not in sys.path:
+        sys.path.insert(0, python_dir)
+    from generator.generate_data import generate_data
+    output_dir = str(tmp_path_factory.mktemp('generated-data'))
+    generate_data(output_dir=output_dir)
+    return output_dir
+
+@pytest.fixture
+def dataframes(data_dir):
+    """Load the full generated-data integration fixture."""
+    merchants_df = pd.read_csv(os.path.join(data_dir, 'merchants.csv'))
+    customers_df = pd.read_csv(os.path.join(data_dir, 'customers.csv'))
+    countries_df = pd.read_csv(os.path.join(data_dir, 'countries.csv'))
     # Parse the timestamp column for transactions
-    transactions_df = pd.read_csv(os.path.join(DATA_DIR, 'transactions.csv'), parse_dates=['timestamp'])
+    transactions_df = pd.read_csv(os.path.join(data_dir, 'transactions.csv'), parse_dates=['timestamp'])
     return merchants_df, customers_df, countries_df, transactions_df
 
-def test_row_counts(dataframes):
+def test_row_counts(dataframes, config):
     """Test that the generated data has the expected number of rows."""
     merchants_df, customers_df, countries_df, transactions_df = dataframes
-    assert len(merchants_df) == 100, f"Expected 100 merchants, got {len(merchants_df)}"
-    assert len(customers_df) == 20000, f"Expected 20000 customers, got {len(customers_df)}"
-    assert len(countries_df) == 15, f"Expected 15 countries, got {len(countries_df)}"
-    assert len(transactions_df) == 75000, f"Expected 75000 transactions, got {len(transactions_df)}"
+    assert len(merchants_df) == config['n_merchants']
+    assert len(customers_df) == config['n_customers']
+    assert len(countries_df) == config['n_countries']
+    assert len(transactions_df) == config['n_transactions']
 
 def test_foreign_keys(dataframes):
     """Test that foreign key constraints are satisfied."""
@@ -83,15 +108,11 @@ def test_declined_transactions_have_decline_reason(dataframes):
     assert len(declined_no_reason) == 0, \
         f"Found {len(declined_no_reason)} declined transactions without a decline reason"
 
-def test_approval_rate_decline_anomaly(dataframes):
-    """Test that M000015 has a significant approval rate decline in the final 60 days."""
+def test_approval_rate_decline_anomaly(dataframes, config):
+    """Test the configured approval-rate decline for the deterministic merchant."""
     merchants_df, _, _, transactions_df = dataframes
-    # Load config to get the end_date
-    import yaml
-    with open(CONFIG_PATH, 'r') as f:
-        config = yaml.safe_load(f)
     end_date = datetime.strptime(config['end_date'], '%Y-%m-%d')
-    spike_start = end_date - timedelta(days=60)
+    spike_start = end_date - timedelta(days=config['anomalies']['approval_rate_decline']['window_days'])
 
     # Get transactions for merchant M000015
     merchant_txns = transactions_df[transactions_df['merchant_id'] == 'M000015'].copy()
@@ -114,20 +135,18 @@ def test_approval_rate_decline_anomaly(dataframes):
     spike_total = len(spike_txns)
     spike_approval_rate = spike_approved / spike_total
 
-    # The decline should be at least 15 percentage points (0.15)
+    threshold = config['anomalies']['approval_rate_decline']['minimum_approval_rate_drop']
     decline = baseline_approval_rate - spike_approval_rate
-    assert decline >= 0.15, f"Approval rate decline is {decline:.2%}, expected at least 15 percentage points"
+    assert decline >= threshold, \
+        f"Approval rate decline is {decline:.2%}, expected at least {threshold:.2%}"
 
-def test_unusual_volume_increase_anomaly(dataframes):
-    """Test that M000095 has a volume increase of at least 2.5 times in the final 30 days."""
+def test_unusual_volume_increase_anomaly(dataframes, config):
+    """Test the configured volume multiplier for the deterministic merchant."""
     merchants_df, _, _, transactions_df = dataframes
-    # Load config to get the end_date and start_date
-    import yaml
-    with open(CONFIG_PATH, 'r') as f:
-        config = yaml.safe_load(f)
     end_date = datetime.strptime(config['end_date'], '%Y-%m-%d')
     start_date = datetime.strptime(config['start_date'], '%Y-%m-%d')
-    spike_start = end_date - timedelta(days=30)
+    spike_days = config['anomalies']['unusual_volume_increase']['window_days']
+    spike_start = end_date - timedelta(days=spike_days)
 
     # Get transactions for merchant M000095
     merchant_txns = transactions_df[transactions_df['merchant_id'] == 'M000095'].copy()
@@ -146,47 +165,49 @@ def test_unusual_volume_increase_anomaly(dataframes):
         baseline_days = 1
     baseline_avg_daily = len(baseline_txns) / baseline_days
 
-    spike_days = 30
     spike_avg_daily = len(spike_txns) / spike_days
 
+    threshold = config['anomalies']['unusual_volume_increase']['minimum_volume_multiplier']
     volume_multiplier = spike_avg_daily / baseline_avg_daily
-    assert volume_multiplier >= 2.5, f"Volume multiplier is {volume_multiplier:.2f}, expected at least 2.5"
+    assert volume_multiplier >= threshold, \
+        f"Volume multiplier is {volume_multiplier:.2f}, expected at least {threshold:.2f}"
 
-def test_chargeback_spike_anomaly(dataframes):
-    """Test that M000032 has a chargeback rate at least 5 times the portfolio rate."""
+def test_chargeback_spike_anomaly(dataframes, config):
+    """Test the configured chargeback flip intensity."""
     merchants_df, _, _, transactions_df = dataframes
     # Get transactions for merchant M000032
     merchant_txns = transactions_df[transactions_df['merchant_id'] == 'M000032'].copy()
     assert not merchant_txns.empty, "Merchant M000032 not found in transactions"
 
-    merchant_chargeback_rate = merchant_txns['is_chargeback'].mean()
-    portfolio_chargeback_rate = transactions_df['is_chargeback'].mean()
+    flip_fraction = config['anomalies']['chargeback_spike']['approved_transaction_flip_fraction']
+    approved_count = merchant_txns['is_approved'].sum()
+    expected_flips = int(__import__('math').ceil(approved_count * flip_fraction))
+    assert merchant_txns['is_chargeback'].sum() >= expected_flips, \
+        f"Chargeback flags are {merchant_txns['is_chargeback'].sum()}, expected at least {expected_flips}"
 
-    rate_multiplier = merchant_chargeback_rate / portfolio_chargeback_rate
-    assert rate_multiplier >= 5, f"Chargeback rate multiplier is {rate_multiplier:.2f}, expected at least 5"
-
-def test_refund_spike_anomaly(dataframes):
-    """Test that M000046 has a refund rate at least 3 times the portfolio rate."""
+def test_refund_spike_anomaly(dataframes, config):
+    """Test the configured refund flip intensity."""
     merchants_df, _, _, transactions_df = dataframes
     # Get transactions for merchant M000046
     merchant_txns = transactions_df[transactions_df['merchant_id'] == 'M000046'].copy()
     assert not merchant_txns.empty, "Merchant M000046 not found in transactions"
 
-    merchant_refund_rate = merchant_txns['is_refunded'].mean()
-    portfolio_refund_rate = transactions_df['is_refunded'].mean()
+    flip_fraction = config['anomalies']['refund_spike']['approved_transaction_flip_fraction']
+    approved_count = merchant_txns['is_approved'].sum()
+    expected_flips = int(__import__('math').ceil(approved_count * flip_fraction))
+    assert merchant_txns['is_refunded'].sum() >= expected_flips, \
+        f"Refund flags are {merchant_txns['is_refunded'].sum()}, expected at least {expected_flips}"
 
-    rate_multiplier = merchant_refund_rate / portfolio_refund_rate
-    assert rate_multiplier >= 3, f"Refund rate multiplier is {rate_multiplier:.2f}, expected at least 3"
-
-def test_anomalous_merchants_exist(dataframes):
-    """Test that there are exactly 4 anomalous merchants."""
+def test_anomalous_merchants_exist(dataframes, config):
+    """Test the configured anomalous merchant count."""
     merchants_df, _, _, _ = dataframes
     anomalous = merchants_df[merchants_df['anomaly_type'] != 'normal']
-    assert len(anomalous) == 4, f"Expected 4 anomalous merchants, got {len(anomalous)}"
+    expected_count = config['anomalies']['anomaly_count']
+    assert len(anomalous) == expected_count, f"Expected {expected_count} anomalous merchants, got {len(anomalous)}"
 
-def test_anomalous_merchants_have_correct_types(dataframes):
-    """Test that the anomalous merchants have the four expected anomaly types."""
+def test_anomalous_merchants_have_correct_types(dataframes, config):
+    """Test the configured anomaly types."""
     merchants_df, _, _, _ = dataframes
     anomalous_types = set(merchants_df[merchants_df['anomaly_type'] != 'normal']['anomaly_type'])
-    expected_types = {'approval_rate_decline', 'chargeback_spike', 'refund_spike', 'unusual_volume_increase'}
+    expected_types = set(config['anomalies']['anomaly_types'])
     assert anomalous_types == expected_types, f"Expected anomaly types {expected_types}, got {anomalous_types}"

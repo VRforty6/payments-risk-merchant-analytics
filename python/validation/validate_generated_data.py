@@ -97,7 +97,9 @@ def print_anomaly_evidence(transactions_df, merchants_df, config_path):
             merchant_txns = transactions_df[transactions_df['merchant_id'] == merchant_id]
             # Define baseline and spike periods (last 60 days)
             end_date = datetime.strptime(config['end_date'], '%Y-%m-%d')
-            spike_start = end_date - timedelta(days=60)
+            spike_start = end_date - timedelta(
+                days=config['anomalies']['approval_rate_decline']['window_days']
+            )
             baseline_mask = merchant_txns['timestamp'] < spike_start
             spike_mask = merchant_txns['timestamp'] >= spike_start
 
@@ -131,7 +133,9 @@ def print_anomaly_evidence(transactions_df, merchants_df, config_path):
             merchant_txns = transactions_df[transactions_df['merchant_id'] == merchant_id]
             # Define baseline and spike periods (last 30 days)
             end_date = datetime.strptime(config['end_date'], '%Y-%m-%d')
-            spike_start = end_date - timedelta(days=30)
+            spike_start = end_date - timedelta(
+                days=config['anomalies']['unusual_volume_increase']['window_days']
+            )
             baseline_mask = merchant_txns['timestamp'] < spike_start
             spike_mask = merchant_txns['timestamp'] >= spike_start
 

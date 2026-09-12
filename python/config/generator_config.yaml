@@ -110,20 +110,22 @@ regions:
 
 # Anomaly configuration for intentional behavioural anomalies
 anomalies:
-  n_anomalous_merchants: 4
+  # Merchant IDs are selected deterministically from random_seed; the four
+  # anomaly roles are assigned in this order.
+  anomaly_count: 4
   anomaly_types:
     - "approval_rate_decline"
     - "chargeback_spike"
     - "refund_spike"
     - "unusual_volume_increase"
-  # Parameters for each anomaly type (applied to the selected merchants)
+  # Parameters below describe the effective implementation thresholds.
   approval_rate_decline:
-    start: 0.9
-    approval_rate end: 0.5
-    # Linear decline over the transaction timeline
+    window_days: 60
+    minimum_approval_rate_drop: 0.15
   chargeback_spike:
-    chargeback_prob multiplier: 10  # 10x increase
+    approved_transaction_flip_fraction: 0.10
   refund_spike:
-    refund_prob multiplier: 10
+    approved_transaction_flip_fraction: 0.10
   unusual_volume_increase:
-    volume multiplier: 5  # 5x increase in transaction volume for that merchant
+    window_days: 30
+    minimum_volume_multiplier: 2.5

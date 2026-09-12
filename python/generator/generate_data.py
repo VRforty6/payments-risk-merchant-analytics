@@ -259,8 +259,7 @@ def apply_approval_rate_decline(transactions_df, merchants_df, config, merchant_
     """
     Apply approval-rate decline anomaly for the specified merchant.
     - Baseline period: all dates except the final 60 days
-    - Final 60-day approval rate target: approximately 65% to 75%
-    - Final 60-day approval rate must be at least 15 percentage points below the baseline period
+    - The configured approval-rate drop is applied over the configured final window
     """
     logger.info(f"Applying approval-rate decline anomaly for merchant {merchant_id}...")
 
@@ -272,7 +271,8 @@ def apply_approval_rate_decline(transactions_df, merchants_df, config, merchant_
 
     # Define baseline and spike periods
     end_date = datetime.strptime(config['end_date'], '%Y-%m-%d')
-    spike_start = end_date - timedelta(days=60)
+    anomaly_settings = config['anomalies']['approval_rate_decline']
+    spike_start = end_date - timedelta(days=anomaly_settings['window_days'])
 
     # Split transactions
     baseline_mask = merchant_txns['timestamp'] < spike_start
@@ -291,7 +291,10 @@ def apply_approval_rate_decline(transactions_df, merchants_df, config, merchant_
     baseline_approval_rate = baseline_approved / baseline_total if baseline_total > 0 else 0
 
     # Target spike approval rate: at least 15 percentage points below baseline
-    target_spike_approval_rate = max(0, baseline_approval_rate - 0.15)
+    target_spike_approval_rate = max(
+        0,
+        baseline_approval_rate - anomaly_settings['minimum_approval_rate_drop']
+    )
 
     # Current spike approval rate
     spike_approved = spike_txns['is_approved'].sum()
@@ -351,7 +354,7 @@ def apply_unusual_volume_increase(transactions_df, merchants_df, config, merchan
     """
     Apply unusual volume increase anomaly for the specified merchant.
     - Baseline period: dates before the final 30 days
-    - Final 30-day daily transaction volume must be at least 2.5 times the merchant’s baseline average daily volume
+    - The configured volume multiplier is applied over the configured final window
     """
     logger.info(f"Applying unusual volume increase anomaly for merchant {merchant_id}...")
 
@@ -363,7 +366,8 @@ def apply_unusual_volume_increase(transactions_df, merchants_df, config, merchan
 
     # Define baseline and spike periods
     end_date = datetime.strptime(config['end_date'], '%Y-%m-%d')
-    spike_start = end_date - timedelta(days=30)
+    anomaly_settings = config['anomalies']['unusual_volume_increase']
+    spike_start = end_date - timedelta(days=anomaly_settings['window_days'])
 
     # Split transactions
     baseline_mask = merchant_txns['timestamp'] < spike_start
@@ -383,11 +387,11 @@ def apply_unusual_volume_increase(transactions_df, merchants_df, config, merchan
     baseline_avg_daily = len(baseline_txns) / baseline_days
 
     # Calculate current spike average daily volume
-    spike_days = 30
+    spike_days = anomaly_settings['window_days']
     spike_avg_daily = len(spike_txns) / spike_days if spike_days > 0 else 0
 
-    # Target: spike average daily volume >= 2.5 * baseline average daily volume
-    target_spike_avg_daily = 2.5 * baseline_avg_daily
+    # Target: spike average daily volume meets the configured multiplier.
+    target_spike_avg_daily = anomaly_settings['minimum_volume_multiplier'] * baseline_avg_daily
 
     # If current spike average already meets or exceeds target, no adjustment needed
     if spike_avg_daily >= target_spike_avg_daily:
@@ -396,18 +400,19 @@ def apply_unusual_volume_increase(transactions_df, merchants_df, config, merchan
 
     # Calculate how many transactions to move from baseline to spike
     # Let B = baseline count, S = spike count, T = B + S (total for merchant)
-    # We want: (S + X) / 30 >= 2.5 * ( (B - X) / baseline_days )
+    # We want: (S + X) / window_days >= multiplier * ( (B - X) / baseline_days )
     # Solve for X:
-    #   (S + X) / 30 >= (2.5 / baseline_days) * (B - X)
-    #   => (S + X) * baseline_days >= 2.5 * 30 * (B - X)
-    #   => baseline_days*S + baseline_days*X >= 75*B - 75*X
-    #   => baseline_days*X + 75*X >= 75*B - baseline_days*S
-    #   => X * (baseline_days + 75) >= 75*B - baseline_days*S
-    #   => X >= (75*B - baseline_days*S) / (baseline_days + 75)
+    #   (S + X) / window_days >= (multiplier / baseline_days) * (B - X)
+    #   => (S + X) * baseline_days >= multiplier * window_days * (B - X)
+    #   => baseline_days*S + baseline_days*X >= multiplier*window_days*B - multiplier*window_days*X
+    #   => X * (baseline_days + multiplier*window_days) >= multiplier*window_days*B - baseline_days*S
+    #   => X >= (multiplier*window_days*B - baseline_days*S) / (baseline_days + multiplier*window_days)
     B = len(baseline_txns)
     S = len(spike_txns)
-    numerator = 75 * B - baseline_days * S
-    denominator = baseline_days + 75
+    multiplier = anomaly_settings['minimum_volume_multiplier']
+    window_days = anomaly_settings['window_days']
+    numerator = multiplier * window_days * B - baseline_days * S
+    denominator = baseline_days + multiplier * window_days
     if denominator <= 0:
         X = 0
     else:
@@ -454,9 +459,8 @@ def apply_spike_anomalies(transactions_df, merchants_df, config):
     """
     logger.info("Applying spike anomalies (chargeback spike and refund spike)...")
 
-    n_anomalous = config['anomalies']['n_anomalous_merchants']
-    anomaly_types = config['anomalies']['anomaly_types']
-
+    anomaly_settings = config['anomalies']
+    anomaly_types = anomaly_settings['anomaly_types']
     # Select random merchants to be anomalous for chargeback_spike and refund_spike
     # We'll use the same merchants as before for consistency, but we need to avoid the two we already used.
     # However, the config specifies 4 anomalous merchants, and we have four types.
@@ -466,7 +470,7 @@ def apply_spike_anomalies(transactions_df, merchants_df, config):
     # We will only apply spike anomalies to merchants with anomaly_type in ['chargeback_spike', 'refund_spike'].
 
     # We'll adjust the transactions for these merchants
-    for anomaly_type in ['chargeback_spike', 'refund_spike']:
+    for anomaly_type in ('chargeback_spike', 'refund_spike'):
         # Get merchants with this anomaly type
         anomalous_merchants = merchants_df[merchants_df['anomaly_type'] == anomaly_type]['merchant_id'].tolist()
         if not anomalous_merchants:
@@ -485,8 +489,9 @@ def apply_spike_anomalies(transactions_df, merchants_df, config):
                 approved_txns = merchant_txns[merchant_txns['is_approved']]
                 if approved_txns.empty:
                     continue
-                # We'll flip 10% of approved transactions to chargeback (as before)
-                n_to_flip = int(np.ceil(len(approved_txns) * 0.1))
+                # Flip the configured fraction of approved transactions to chargeback.
+                flip_fraction = config['anomalies'][anomaly_type]['approved_transaction_flip_fraction']
+                n_to_flip = int(np.ceil(len(approved_txns) * flip_fraction))
                 # Select the earliest n_to_flip approved transactions by timestamp
                 to_flip = approved_txns.sort_values('timestamp').head(n_to_flip)
                 for _, row in to_flip.iterrows():
@@ -505,7 +510,8 @@ def apply_spike_anomalies(transactions_df, merchants_df, config):
                 approved_txns = merchant_txns[merchant_txns['is_approved']]
                 if approved_txns.empty:
                     continue
-                n_to_flip = int(np.ceil(len(approved_txns) * 0.1))
+                flip_fraction = config['anomalies'][anomaly_type]['approved_transaction_flip_fraction']
+                n_to_flip = int(np.ceil(len(approved_txns) * flip_fraction))
                 to_flip = approved_txns.sort_values('timestamp').head(n_to_flip)
                 for _, row in to_flip.iterrows():
                     idx = row.name
@@ -526,7 +532,7 @@ def introduce_anomalies(transactions_df, merchants_df, config):
     logger.info("Introducing behavioural anomalies...")
 
     # Mark the four anomalous merchants in the merchants DataFrame (as before)
-    n_anomalous = config['anomalies']['n_anomalous_merchants']
+    n_anomalous = config['anomalies']['anomaly_count']
     anomaly_types = config['anomalies']['anomaly_types']
 
     # Select random merchants to be anomalous
@@ -734,7 +740,7 @@ def print_anomaly_evidence(transactions_df, merchants_df, config):
 
     logger.info("========================")
 
-def main():
+def generate_data(output_dir=None):
     """Main function to generate, validate, and save synthetic payment data."""
     logger.info("Starting synthetic payment data generation...")
 
@@ -767,7 +773,8 @@ def main():
         logger.info("Validation passed.")
 
     # Save to CSV files
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'raw')
+    if output_dir is None:
+        output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'raw')
     os.makedirs(output_dir, exist_ok=True)
 
     merchants_df = merchants_df[[
@@ -824,6 +831,16 @@ def main():
     print_anomaly_evidence(transactions_df, merchants_df, config)
 
     logger.info("Data generation completed successfully.")
+    return {
+        'merchants': merchants_df,
+        'customers': customers_df,
+        'countries': countries_df,
+        'transactions': transactions_df,
+    }
+
+def main():
+    """Generate the default dataset under data/raw/."""
+    generate_data()
 
 if __name__ == "__main__":
     main()
