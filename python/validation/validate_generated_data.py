@@ -4,11 +4,20 @@ Validation script for synthetic payment data.
 import pandas as pd
 import os
 import logging
+from decimal import Decimal, ROUND_HALF_UP
 from datetime import datetime, timedelta
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+def expected_processing_fee(amount, is_approved):
+    """Return the exact-cent fee required by the approved-only fee rule."""
+    if not is_approved:
+        return Decimal('0.00')
+    # Preserve the generator's existing Python round(..., 2) semantics while
+    # comparing the resulting value exactly at cent precision.
+    return Decimal(f"{round(float(amount) * 0.029 + 0.30, 2):.2f}")
 
 def load_data(data_dir):
     """Load the CSV files from the data directory."""
@@ -70,6 +79,16 @@ def validate_transactions(transactions_df, merchants_df, customers_df, countries
     declined_no_reason = transactions_df[(~transactions_df['is_approved']) & (transactions_df['decline_reason'].isna())]
     if not declined_no_reason.empty:
         errors.append(f"Declined transactions without decline reason: {len(declined_no_reason)} rows")
+
+    # 8. Processing fees apply only to approved transactions and use exact cents.
+    invalid_processing_fees = []
+    for _, row in transactions_df.iterrows():
+        actual = Decimal(str(row['processing_fee'])).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        expected = expected_processing_fee(row['amount'], bool(row['is_approved']))
+        if actual != expected:
+            invalid_processing_fees.append(row['transaction_id'])
+    if invalid_processing_fees:
+        errors.append(f"Processing fees inconsistent with approval status/formula: {len(invalid_processing_fees)} rows")
 
     return errors
 

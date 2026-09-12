@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import pytest
 import sys
+from decimal import Decimal, ROUND_HALF_UP
 from datetime import datetime, timedelta
 
 pytestmark = pytest.mark.integration
@@ -107,6 +108,17 @@ def test_declined_transactions_have_decline_reason(dataframes):
     declined_no_reason = transactions_df[(~transactions_df['is_approved']) & (transactions_df['decline_reason'].isna())]
     assert len(declined_no_reason) == 0, \
         f"Found {len(declined_no_reason)} declined transactions without a decline reason"
+
+def test_processing_fee_rule(dataframes):
+    """Test exact-cent approved-only processing fees, including declined anomalies."""
+    _, _, _, transactions_df = dataframes
+    for _, row in transactions_df.iterrows():
+        if not row['is_approved']:
+            expected = Decimal('0.00')
+        else:
+            expected = Decimal(f"{round(float(row['amount']) * 0.029 + 0.30, 2):.2f}")
+        actual = Decimal(str(row['processing_fee'])).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        assert actual == expected, f"Fee mismatch for {row['transaction_id']}: {actual} != {expected}"
 
 def test_approval_rate_decline_anomaly(dataframes, config):
     """Test the configured approval-rate decline for the deterministic merchant."""

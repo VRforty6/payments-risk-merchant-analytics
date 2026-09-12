@@ -231,6 +231,7 @@ Refresh the imported model against `localhost` and database `PaymentsRiskAnalyti
 - Generated markets use synthetic labels and should not be treated as real country activity.
 - Generated merchants and customers are fictional.
 - The predefined `RiskTier` field is synthetic metadata created by the generator.
+- Processing fees are modeled only on approved synthetic transactions; declined attempts carry a zero processing fee.
 - Observed risk visuals use validated behavioral measures such as chargeback rate, refund rate, decline rate, and transaction exposure.
 - Raw CSV outputs are excluded from Git to keep the repository lightweight and reproducible.
 

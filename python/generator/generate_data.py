@@ -177,8 +177,6 @@ def generate_transactions(config, merchants, customers, countries):
         amount = max(0.01, np.random.normal(merchant['amount_mean'], merchant['amount_std']))
         # Round to 2 decimal places
         amount = round(amount, 2)
-        # Processing fee: assume a percentage of amount, say 2.9% + $0.30 typical for cards
-        processing_fee = round(amount * 0.029 + 0.30, 2)
         # Select payment method based on weights
         payment_method = np.random.choice(
             [m['method'] for m in config['payment_methods']],
@@ -231,6 +229,9 @@ def generate_transactions(config, merchants, customers, countries):
             if is_chargeback:
                 # Chargeback amount is usually the full transaction amount
                 chargeback_amount = amount
+
+        # Processing fees apply only to approved transaction attempts.
+        processing_fee = round(amount * 0.029 + 0.30, 2) if is_approved else 0.0
 
         transactions.append({
             'transaction_id': f"T{i:010d}",
@@ -341,10 +342,7 @@ def apply_approval_rate_decline(transactions_df, merchants_df, config, merchant_
         transactions_df.at[idx, 'refund_amount'] = 0.0
         transactions_df.at[idx, 'is_chargeback'] = False
         transactions_df.at[idx, 'chargeback_amount'] = 0.0
-        # Note: processing fee should still apply? Business rules: processing fee should apply only to approved transactions.
-        # So we set processing_fee to 0 for declined transactions?
-        # However, the original generation logic set processing_fee based on amount regardless of approval.
-        # To adhere to business rules, we'll set processing_fee to 0 for declined transactions.
+        # Enforce the fee invariant when an approved row is changed to declined.
         transactions_df.at[idx, 'processing_fee'] = 0.0
 
     logger.info(f"Approval-rate decline applied for merchant {merchant_id}. Flipped {X} transactions.")
