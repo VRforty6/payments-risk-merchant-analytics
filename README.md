@@ -26,7 +26,7 @@ The customer and payment page compares payment methods, channels, devices, custo
 
 ## Project Overview
 
-This project models a synthetic payments portfolio with 75,000 transactions across 20,000 generated customers, 100 actual merchants, 15 generated markets, and a transaction date range from 2024-07-09 through 2026-07-09. The dimensional warehouse includes unknown-member records for the customer, merchant, geography, date, payment method, and transaction status dimensions.
+This project models a synthetic payments portfolio with 75,000 transactions across 20,000 generated customers, 100 synthetic merchants, 15 generated markets, and a transaction date range from 2024-07-09 through 2026-07-09. The dimensional warehouse includes unknown-member records for the customer, merchant, geography, date, payment method, and transaction status dimensions.
 
 The Power BI report is stored as a PBIP project so the report definition, semantic model, PBIR layout files, and TMDL model files can be reviewed in Git. Raw generated CSV files are intentionally excluded from version control and can be regenerated from the Python source.
 
@@ -199,7 +199,7 @@ pytest python/tests
 
 ### 4. Create and load the SQL Server warehouse
 
-The current working SQL execution order is documented by `sql/procedures/12_run_full_load.sql` and uses the top-level SQL scripts:
+The canonical SQL execution order uses the top-level scripts below:
 
 ```powershell
 sqlcmd -S localhost -i sql/01_create_database.sql
@@ -207,8 +207,8 @@ sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/02_create_tables.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/03_load_csvs.sql -v CsvPath="C:/path/to/payment-risk-merchant-analytics/data/raw/"
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/04_load_dimensions_and_fact.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/05_create_views.sql
-sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/07_apply_display_labels.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/06_validation_queries.sql
+sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/07_apply_display_labels.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/tests/10_data_quality_checks.sql
 sqlcmd -S localhost -d PaymentsRiskAnalytics -i sql/tests/11_reconciliation_tests.sql
 ```

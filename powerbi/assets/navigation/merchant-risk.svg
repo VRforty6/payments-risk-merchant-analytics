@@ -1,8 +1,0 @@
-<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Shield -->
-  <path d="M12 2 L2 7 L2 12 L6 12 L6 18 L12 20 L18 18 L18 12 L22 12 L22 7 Z"/>
-  <!-- Risk indicator: three bars -->
-  <rect x="8" y="10" width="2" height="6"/>
-  <rect x="11" y="8" width="2" height="8"/>
-  <rect x="14" y="6" width="2" height="10"/>
-</svg>

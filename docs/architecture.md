@@ -1,72 +1,51 @@
 # Architecture Overview
 
-## High-Level Architecture
+Payments Risk & Merchant Analytics is a reproducible portfolio project for synthetic payment behavior, merchant risk analysis, and Power BI reporting.
 
-The Payments Risk & Merchant Analytics portfolio project follows a layered architecture:
+## Data Flow
 
-1. **Data Generation Layer** (Python)
-   - Synthetic data generation using Faker, NumPy, Pandas
-   - Configurable parameters and probability distributions
-   - Validation using Great Expectations
-   - Output: Raw CSV files stored in `data/raw/`
+```text
+Python synthetic generator
+        |
+Generated CSV files
+        |
+Python validation
+        |
+SQL Server staging schema
+        |
+SQL Server dimensional dw schema
+        |
+Reporting views and validation SQL
+        |
+Power BI Import semantic model
+        |
+Three visible dashboard pages
+```
 
-2. **Storage & Processing Layer** (SQL Server)
-   - Staging schema: Raw data landing zone
-   - Dimensional schema: Star schema for analytical queries
-   - ETL pipelines: T-SQL stored procedures for data transformation and loading
-   - Data quality checks: Audit tables and constraints
-   - Reporting views: Pre-aggregated and filtered views for Power BI
+The Python generator creates reproducible synthetic merchants, customers, markets, and transaction attempts. The CSV files are loaded into the SQL Server `staging` schema, then transformed into a star schema in `dw`.
 
-3. **Semantic Model Layer** (Power BI)
-   - Import mode model connecting to SQL Server views
-   - DAX measures for KPIs and calculated columns
-   - Row-level security (if required)
-   - Custom themes and visualizations
+## Warehouse Model
 
-4. **Presentation Layer** (Power BI)
-   - Interactive reports across 5 pages:
-     1. Executive Overview
-     2. Merchant Risk Analysis
-     3. Transaction Diagnostics
-     4. Data Quality and Reconciliation
-     5. Merchant Transaction Drillthrough
-   - GitHub for version control, documentation, and presentation
+`dw.FactTransactions` contains one row per payment transaction attempt and is related to these seven imported Power BI tables:
 
-## Key Architectural Decisions
+- `dw.DimCustomer`
+- `dw.DimDate`
+- `dw.DimGeography`
+- `dw.DimMerchant`
+- `dw.DimPaymentMethod`
+- `dw.DimTransactionStatus`
+- `dw.FactTransactions`
 
-### Schema Separation
-- **Staging Schema**: Contains raw tables that mirror the CSV file structure exactly. Used for initial data loading and validation.
-- **Dimensional Schema**: Implements a star schema with:
-  - Fact table: `FactTransactions` (grain: one row per payment transaction attempt)
-  - Dimension tables: `DimDate`, `DimMerchant`, `DimCustomer`, `DimGeography`, `DimPaymentMethod`, `DimTransactionStatus`
-  - Additional tables: `FactMerchantDailyPerformance` (or equivalent reporting view), `AuditDataQuality`, `RejectedTransactions`
-- This separation allows for:
-  - Clear separation of concerns between raw ingestion and optimized analytics
-  - Ability to rerun ETL from raw data without regenerating source files
-  - Independent optimization of staging (for load) vs dimensional (for query) schemas
+Reporting views support SQL analysis and validation. Power BI imports the seven `dw` tables directly from SQL Server using Windows authentication and Import mode. The PBIP project stores the report definition as PBIR and the semantic model as TMDL for source control and review.
 
-### Data Flow
-1. Python generator creates synthetic CSV files in `data/raw/`
-2. SQL ETL processes:
-   - Load raw data into staging tables
-   - Validate and cleanse data
-   - Insert into dimensional model
-   - Log data quality issues to `AuditDataQuality`
-   - Route invalid records to `RejectedTransactions`
-3. Power BI connects directly to SQL Server views (or imported model) for reporting
-4. All artifacts (code, SQL, documentation) versioned in GitHub
+## Power BI Report
 
-## Technology Choices
+The current report has three visible production pages:
 
-- **Python**: Chosen for its rich ecosystem in synthetic data generation (Faker), data manipulation (Pandas), and validation (Great Expectations)
-- **SQL Server**: Selected as a robust, industry-standard relational database with strong analytical capabilities
-- **Power BI**: Chosen for its powerful DAX language, integration with SQL Server, and enterprise-ready reporting features
-- **GitHub**: Used for version control, issue tracking, and project presentation
+1. Executive Overview
+2. Merchant Risk
+3. Customer & Payment Analysis
 
-## Assumptions
+It also contains a hidden `Validation Measures` page used to reconcile core DAX measures with SQL baselines. The report pages are 1920 × 1080 and use a consistent Enterprise BI Dark visual system.
 
-### Data Volumes: 10010
-
-We are not in our implementation is database layer: we have no change.
-
-Note: This architecture avoids any claims of being a production payment processing system. it is purely an analytics portfolio project.
+All entities and activity are synthetic. The predefined merchant `RiskTier` is generated metadata, not an externally validated risk classification or behavioral risk score.

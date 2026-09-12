@@ -139,6 +139,7 @@ INSERT INTO dw.FactTransactions (
     ChargebackAmount,
     IsRefunded,
     IsChargeback,
+    DeclineReason,
     DeviceType,
     Channel
 )
@@ -161,6 +162,7 @@ SELECT
     t.chargeback_amount AS ChargebackAmount,
     CASE WHEN LOWER(t.is_refunded) = 'true' THEN 1 ELSE 0 END AS IsRefunded,
     CASE WHEN LOWER(t.is_chargeback) = 'true' THEN 1 ELSE 0 END AS IsChargeback,
+    t.decline_reason AS DeclineReason,
     t.device_type AS DeviceType,
     t.channel AS Channel
 FROM staging.Transactions t

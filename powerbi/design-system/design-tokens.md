@@ -78,7 +78,7 @@
 - **Outer Page Margin**: 24px
 - **Grid Columns**: 12 columns
 - **Gutter**: 24px
-- **Column Width**: Calculated based on 1280px canvas (see layout spec)
+- **Canvas**: 1920 × 1080 for the current PBIR report pages
 
 ## Effects
 

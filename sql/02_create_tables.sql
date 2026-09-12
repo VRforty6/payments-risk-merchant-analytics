@@ -157,6 +157,7 @@ CREATE TABLE dw.FactTransactions (
     ChargebackAmount DECIMAL(18,2) NOT NULL,
     IsRefunded BIT NOT NULL,
     IsChargeback BIT NOT NULL,
+    DeclineReason VARCHAR(100) NULL,
     DeviceType VARCHAR(50),
     Channel VARCHAR(50),
     CONSTRAINT FK_Fact_Date FOREIGN KEY (DateKey) REFERENCES dw.DimDate(DateKey),
