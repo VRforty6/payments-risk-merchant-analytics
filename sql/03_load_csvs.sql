@@ -2,6 +2,9 @@
 -- Supply CsvPath through sqlcmd, for example:
 -- sqlcmd -S <server> -d PaymentsRiskAnalytics -i sql/03_load_csvs.sql -v CsvPath="C:/path/to/payment-risk-analytics/data/raw/"
 
+USE PaymentsRiskAnalytics;
+GO
+
 -- Truncate staging tables to ensure clean load
 TRUNCATE TABLE staging.Countries;
 TRUNCATE TABLE staging.Merchants;

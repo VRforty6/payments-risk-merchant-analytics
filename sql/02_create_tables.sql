@@ -1,4 +1,7 @@
 -- 02_create_tables.sql
+USE PaymentsRiskAnalytics;
+GO
+
 -- Schemas
 IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'staging')
     EXEC('CREATE SCHEMA staging');
@@ -217,7 +220,6 @@ GO
 -- Insert the transaction status seed records used by the fact load.
 IF NOT EXISTS (SELECT 1 FROM dw.DimTransactionStatus WHERE TransactionStatusKey = 0)
 BEGIN
-    SET IDENTITY_INSERT dw.DimTransactionStatus ON;
     INSERT INTO dw.DimTransactionStatus (
         TransactionStatusKey,
         IsApproved,
@@ -231,6 +233,5 @@ BEGIN
         (0, 0, 'Unknown', 0, 0.00, 0, 0.00),
         (1, 1, NULL, 0, 0.00, 0, 0.00),
         (2, 0, NULL, 0, 0.00, 0, 0.00);
-    SET IDENTITY_INSERT dw.DimTransactionStatus OFF;
 END
 GO
